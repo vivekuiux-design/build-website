@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Build Studio — AI Pods. Buy an outcome, not a headcount.</title>
-<meta name="description" content="Build Studio is Truminds' AI Pod delivery practice. One team, sized to one outcome — engineers, AI employees, and a person approving every real change.">
+<meta name="description" content="Build Studio is Truminds' AI Pod delivery practice. One team, sized to one outcome — engineers, AI agents, and a person approving every real change.">
 <meta name="theme-color" content="#07080b">
 <meta property="og:type" content="website">
 <meta property="og:title" content="Build Studio — AI Pods">
@@ -428,9 +428,8 @@ body.on-light .burger i{background:var(--ink)}
 .sw__out{fill:none;stroke:rgba(255,255,255,.3);stroke-width:1.5;stroke-dasharray:5 5}
 .sw__ic{fill:rgba(255,255,255,.88)}
 .sw__ic--ai{fill:#3ddc97}
-.sw__nl{font-size:9.8px;letter-spacing:.05em;fill:rgba(255,255,255,.52)}
+.sw__nl{font-size:10.5px;letter-spacing:.02em;fill:rgba(255,255,255,.6)}
 .sw__nl--ai{fill:rgba(61,220,151,.95);font-weight:600}
-.sw__nl--fde{fill:rgba(140,165,245,.95);font-weight:600}
 .sw__mid{display:flex;flex-direction:column;align-items:center;gap:10px;
   font-size:9.5px;letter-spacing:.22em;text-transform:uppercase;color:var(--faint)}
 .sw__mid i{display:none}
@@ -442,7 +441,7 @@ body.on-light .burger i{background:var(--ink)}
   grid-template-columns:repeat(4,minmax(0,1fr));grid-template-rows:auto auto;
   gap:clamp(18px,2.4vw,34px) clamp(18px,2.6vw,40px)}
 .podviz{grid-column:1 / -1;grid-row:1;justify-self:center;
-  width:min(100%,clamp(380px,46vw,620px));background:none;padding:0;
+  width:min(100%,clamp(400px,52vw,720px));background:none;padding:0;
   margin-bottom:clamp(-70px,-4.5vw,-18px)}
 
 .pc{position:relative;cursor:default}
@@ -473,19 +472,14 @@ body.on-light .burger i{background:var(--ink)}
 
 /* the diagram itself — these rules were lost when the configurator
    block was replaced; without them the SVG text falls back to black */
-.viz{position:relative;aspect-ratio:11/10;margin-top:4px}
+.viz{position:relative;aspect-ratio:600/420;margin-top:4px}
 .viz svg{position:absolute;inset:0;width:100%;height:100%;overflow:visible}
-.viz__tip{position:absolute;z-index:4;pointer-events:none;padding:7px 12px;border-radius:999px;
-  background:#fff;color:var(--ink);font-size:11px;font-weight:600;white-space:nowrap;
-  opacity:0;transform:translate(-50%,-150%) scale(.9);
-  transition:opacity .25s var(--e),transform .25s var(--e)}
-.viz__tip.on{opacity:1;transform:translate(-50%,-150%) scale(1)}
 .vnode{cursor:pointer}
-.vlbl{font-size:8.6px;font-weight:600;letter-spacing:.01em;fill:rgba(255,255,255,.8);
+.vlbl{font-size:10.5px;font-weight:600;letter-spacing:.01em;fill:rgba(255,255,255,.85);
   pointer-events:none;
   /* knock the connector lines out from behind each label */
   paint-order:stroke;stroke:var(--void);stroke-width:3.5px;stroke-linejoin:round}
-.vlbl.ai{fill:#6fe7b4}
+.vlbl.ai{fill:#6fe7b4;font-weight:600}
 .vhub-t{font-size:14px;font-weight:600;letter-spacing:-.03em;fill:#fff;pointer-events:none}
 .vhub-s{font-size:8.5px;font-weight:600;letter-spacing:.14em;fill:rgba(255,255,255,.72);
   pointer-events:none}
@@ -532,15 +526,31 @@ body.on-light .burger i{background:var(--ink)}
 .ch__q::before{content:"“"}
 .ch__q::after{content:"”"}
 .chooser.swap .ch__q{opacity:0;transform:translateY(8px)}
-.ch__facts{margin:clamp(14px,1.6vw,20px) 0 clamp(18px,2.2vw,28px);display:grid;gap:0}
-.ch__facts>div{display:grid;grid-template-columns:104px minmax(0,1fr);gap:16px;
-  align-items:baseline;padding:10px 0;border-top:1px solid var(--wline)}
-.ch__facts dt{font-size:10px;letter-spacing:.18em;text-transform:uppercase;font-weight:600;
-  color:rgba(255,255,255,.5)}
-.ch__facts dd{margin:0;font-size:13.5px;line-height:1.35;color:#fff;
+.ch__out{margin:clamp(12px,1.5vw,18px) 0 0;font-size:13.5px;line-height:1.4;
+  color:rgba(255,255,255,.62);transition:opacity .3s var(--e)}
+/* one row per augmented seat — the specialist, and the AI agent beside them */
+.ch__seats{margin-top:clamp(14px,1.8vw,22px);transition:opacity .3s var(--e)}
+.seat{display:grid;grid-template-columns:minmax(0,1fr) 14px minmax(0,1fr);
+  align-items:center;gap:0 10px;padding:9px 0;border-top:1px solid var(--wline)}
+.seat span{font-size:13px;color:#fff;letter-spacing:-.012em}
+.seat i{font-style:normal;font-size:13px;letter-spacing:-.012em;color:#7fe3b4}
+.seat::before{content:"+";grid-column:2;grid-row:1;justify-self:center;
+  font-size:12px;color:rgba(255,255,255,.3)}
+.seat--h{border-top:0;padding-top:0}
+.seat--h span,.seat--h i{font-size:9.5px;letter-spacing:.17em;text-transform:uppercase;
+  font-weight:600;color:rgba(255,255,255,.42)}
+.seat--h::before{content:""}
+.ch__dels{margin-top:clamp(16px,2vw,24px);margin-bottom:clamp(18px,2.4vw,30px);
   transition:opacity .3s var(--e)}
-.chooser.swap .ch__facts dd{opacity:0}
-@media(max-width:520px){.ch__facts>div{grid-template-columns:1fr;gap:5px}}
+.ch__dels h4{font-size:9.5px;letter-spacing:.17em;text-transform:uppercase;font-weight:600;
+  color:rgba(255,255,255,.42);margin:0 0 8px}
+.ch__dels ul{margin:0;padding:0;list-style:none;display:grid;gap:6px}
+.ch__dels li{position:relative;padding-left:14px;font-size:12.5px;line-height:1.4;
+  color:rgba(255,255,255,.72)}
+.ch__dels li::before{content:"";position:absolute;left:0;top:.52em;width:5px;height:1px;
+  background:rgba(255,255,255,.4)}
+.chooser.swap .ch__out,.chooser.swap .ch__seats,.chooser.swap .ch__dels{opacity:0}
+@media(max-width:520px){.seat{grid-template-columns:1fr;gap:2px}.seat::before{display:none}}
 .ch__cta{margin-top:auto;align-self:flex-start}
 
 /* right: the ten sentences */
@@ -565,13 +575,6 @@ body.on-light .burger i{background:var(--ink)}
 /* the inline answer — only used once the layout stacks */
 .ch__item{display:contents}
 .ch__d{display:none}
-.ch__dl{margin:0;display:grid}
-.ch__dl>div{display:grid;grid-template-columns:92px minmax(0,1fr);gap:12px;
-  align-items:baseline;padding:10px 0;border-top:1px solid rgba(255,255,255,.1)}
-.ch__dl dt{font-size:9.5px;letter-spacing:.17em;text-transform:uppercase;font-weight:600;
-  color:rgba(255,255,255,.55)}
-.ch__dl dd{margin:0;font-size:13.5px;line-height:1.4;color:#fff}
-.ch__dl dd strong{font-weight:600}
 .ch__dgo{display:inline-flex;align-items:center;gap:8px;margin-top:14px;cursor:pointer;
   border:0;border-radius:999px;padding:10px 16px;font-size:12.5px;font-weight:600;
   background:#fff;color:var(--ink)}
@@ -594,7 +597,9 @@ body.on-light .burger i{background:var(--ink)}
    real call to action, so it is built to outweigh the ten tiles above it. */
 @keyframes kcSlot{0%,100%{box-shadow:0 0 0 0 rgba(255,255,255,.42)}
   60%{box-shadow:0 0 0 10px rgba(255,255,255,0)}}
-.kc__or{display:flex;align-items:center;gap:16px;margin-top:clamp(18px,2.2vw,30px);
+.ch__note{margin:clamp(14px,1.8vw,22px) 0 0;font-size:12.5px;color:var(--mute);
+  max-width:62ch}
+.kc__or{display:flex;align-items:center;gap:16px;margin-top:clamp(14px,1.8vw,24px);
   font-size:10px;letter-spacing:.24em;text-transform:uppercase;color:var(--mute)}
 .kc__or i{flex:1;height:1px;background:var(--line)}
 .kcustom{position:relative;overflow:hidden;width:100%;margin-top:clamp(12px,1.6vw,20px);
@@ -833,7 +838,7 @@ body.on-light .burger i{background:var(--ink)}
     <div class="navl" id="navl">
       <span class="pip" id="pip" aria-hidden="true"></span>
       <a href="#pod">The pod</a><a href="#shift">The shift</a>
-      <a href="#configure">Configure</a><a href="#work">Work</a>
+      <a href="#configure">Start here</a><a href="#work">Work</a>
     </div>
     <a class="btn nav__cta" href="#talk" data-mag>
       <span class="btn__t"><s>Get in touch</s><s aria-hidden="true">Get in touch</s></span>
@@ -843,7 +848,7 @@ body.on-light .burger i{background:var(--ink)}
 </nav>
 <div class="sheet" id="sheet" aria-hidden="true">
   <a href="#pod"><span>The pod</span></a><a href="#shift"><span>The shift</span></a>
-  <a href="#configure"><span>Configure</span></a>
+  <a href="#configure"><span>Start here</span></a>
   <a href="#work"><span>Work</span></a>
   <a href="#talk"><span>Get in touch</span></a>
 </div>
@@ -860,11 +865,11 @@ body.on-light .burger i{background:var(--ink)}
 
   <div class="hero__in" id="heroIn">
     <h1 class="display">
-      <span class="sp-l"><span>Buy an <span class="dot">outcome</span>.</span></span>
+      <span class="sp-l"><span>Buy an <span class="dot">outcome</span></span></span>
     </h1>
     <p class="hero__lead fade f1"><span class="sp-l"><span>Not a headcount.</span></span></p>
     <p class="hero__sub fade f1">Build Studio is Truminds' AI Pod delivery practice. One team,
-      sized to one outcome — engineers, AI employees, and a person approving every real change.</p>
+      sized to one outcome — engineers, AI agents, and a person approving every real change.</p>
     <div class="hero__row fade f2">
       <a class="btn" href="#configure" data-mag>
         <span class="btn__t"><s>Shape your POD</s><s aria-hidden="true">Shape your POD</s></span>
@@ -922,12 +927,12 @@ body.on-light .burger i{background:var(--ink)}
 
       <div class="pc pc--r pc--b" data-hl="seats">
         <span class="pc__n">02</span>
-        <p>Truminds engineers and AI employees, one team.</p>
+        <p>Every specialist is paired with their own AI agent.</p>
       </div>
 
       <div class="podviz">
         <div class="viz" id="viz">
-          <svg viewBox="0 0 440 400" role="img" aria-label="Diagram of a pod: a central hub connected to human roles and AI employees">
+          <svg viewBox="0 0 600 420" role="img" aria-label="Diagram of a pod: each specialist paired with their own AI agent">
             <defs>
               <linearGradient id="gHub" x1="0" y1="0" x2="1" y2="1">
                 <stop offset="0" stop-color="#5e78d8"/><stop offset=".55" stop-color="#c2486e"/>
@@ -935,24 +940,23 @@ body.on-light .burger i{background:var(--ink)}
               <radialGradient id="gGlow"><stop offset="0" stop-color="#5e78d8" stop-opacity=".45"/>
                 <stop offset="1" stop-color="#5e78d8" stop-opacity="0"/></radialGradient>
             </defs>
-            <circle cx="220" cy="196" r="126" fill="url(#gGlow)"/>
-            <g id="vLines"></g><g id="vPulse"></g><g id="vNodes"></g>
+            <circle cx="300" cy="205" r="132" fill="url(#gGlow)"/>
+            <g id="vLines"></g><g id="vPulse"></g><g id="vNodes"></g><g id="vLabels"></g>
             <g id="vHub">
-              <circle cx="220" cy="196" r="44" fill="url(#gHub)"/>
-              <circle cx="220" cy="196" r="44" fill="none" stroke="rgba(255,255,255,.3)" stroke-width="1"/>
-              <circle id="vRing" cx="220" cy="196" r="54" fill="none" stroke="rgba(255,255,255,.14)"
+              <circle cx="300" cy="205" r="44" fill="url(#gHub)"/>
+              <circle cx="300" cy="205" r="44" fill="none" stroke="rgba(255,255,255,.3)" stroke-width="1"/>
+              <circle id="vRing" cx="300" cy="205" r="54" fill="none" stroke="rgba(255,255,255,.14)"
                       stroke-width="1" stroke-dasharray="3 7"/>
-              <text class="vhub-t" x="220" y="202" text-anchor="middle">POD</text>
-              <text class="vhub-s" x="220" y="208" text-anchor="middle" id="vHubN">5.75 FTE</text>
+              <text class="vhub-t" x="300" y="211" text-anchor="middle">POD</text>
+              <text class="vhub-s" x="300" y="217" text-anchor="middle" id="vHubN"></text>
             </g>
           </svg>
-          <div class="viz__tip" id="vizTip"></div>
-        </div>
+                  </div>
       </div>
 
       <div class="pc pc--l pc--c" data-hl="fde">
         <span class="pc__n">03</span>
-        <p>One seat — the FDE — sits on your side, not ours.</p>
+        <p>The FDE works alongside your team — a collaboration seat, not a paired one.</p>
       </div>
 
       <div class="pc pc--r pc--d" data-hl="ai">
@@ -998,7 +1002,7 @@ body.on-light .burger i{background:var(--ink)}
         <figcaption class="sw__h"><span class="sw__k sw__k--b">The Truminds POD</span>
           <b>We run delivery</b></figcaption>
         <svg viewBox="0 0 520 430" role="img"
-             aria-label="You connected by one line to a pod — tech lead, forward deployed engineer, QA and two AI employees — and the pod to an outcome.">
+             aria-label="You connected by one line to a pod of specialists, each paired with their own AI agent, and the pod to an outcome.">
           <defs>
             <linearGradient id="gOut" x1="0" y1="0" x2="1" y2="0">
               <stop offset="0" stop-color="#5e78d8"/><stop offset=".55" stop-color="#c2486e"/>
@@ -1037,12 +1041,9 @@ body.on-light .burger i{background:var(--ink)}
       <!-- the answer, written out -->
       <div class="ch__panel">
         <p class="ch__q" id="chQ"></p>
-        <dl class="ch__facts">
-          <div><dt>You get</dt><dd id="chOut"></dd></div>
-          <div><dt>The pod</dt><dd id="chTeam"></dd></div>
-          <div><dt>It covers</dt><dd id="chPh"></dd></div>
-          <div><dt>Approval</dt><dd>A person signs off every real change</dd></div>
-        </dl>
+        <p class="ch__out" id="chOut"></p>
+        <div class="ch__seats" id="chSeats"></div>
+        <div class="ch__dels"><h4>You receive</h4><ul id="chDels"></ul></div>
         <button class="btn ch__cta" type="button" id="chGo">
           <span class="btn__t"><s>Start with this pod</s><s aria-hidden="true">Start with this pod</s></span>
           <span class="btn__ar" aria-hidden="true"><svg viewBox="0 0 12 12" fill="none"><path d="M2 6h8M6.5 2.5 10 6l-3.5 3.5" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
@@ -1053,6 +1054,9 @@ body.on-light .burger i{background:var(--ink)}
       <div class="ch__list" id="chList" role="listbox"
            aria-label="Choose the outcome closest to yours"></div>
     </div>
+
+    <p class="ch__note r r2">Each kit is a starting configuration. Scope, seat mix,
+      timeline and commercials are confirmed after discovery.</p>
 
     <div class="kc__or" aria-hidden="true"><i></i><span>or</span><i></i></div>
 
@@ -1069,17 +1073,14 @@ body.on-light .burger i{background:var(--ink)}
         <span class="kc__k">Custom pod</span>
         <span class="kc__t">None of the ten? <b>Describe the outcome and we will
           shape a pod around it.</b></span>
-        <span class="kc__s">Roles, AI employees and gates, set to your situation.</span>
+        <span class="kc__s">Roles, AI agents and gates, set to your situation.</span>
       </span>
       <span class="kc__go"><span>Tell us the outcome</span><svg viewBox="0 0 12 12" fill="none" width="11" height="11" aria-hidden="true"><path d="M2 6h8M6.5 2.5 10 6l-3.5 3.5" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
     </button>
   </div>
 </section>
 
-<!-- ───────── 03 WAYS ───────── -->
-
-
-<!-- ───────── 04 WORK ───────── -->
+<!-- ───────── 05 WORK ───────── -->
 <section class="zone-l" id="work">
   <div class="wrap">
     <div class="shead">
@@ -1145,7 +1146,7 @@ body.on-light .burger i{background:var(--ink)}
     <div class="foot__big" id="footBig"><svg class="bsm" viewBox="0 0 132 21" aria-hidden="true" focusable="false"><use href="#bsMark"/></svg><i aria-hidden="true"><svg class="bsm" viewBox="0 0 132 21" aria-hidden="true" focusable="false"><use href="#bsMark"/></svg></i></div>
     <div class="foot__note">
       <p class="lede">Part of Truminds.
-        Engineers, AI employees, and a method that holds up.</p>
+        Engineers, AI agents, and a method that holds up.</p>
     </div>
   </div>
   <div class="foot__b">
@@ -1243,80 +1244,128 @@ function splitWords(node){
    DATA
    ═══════════════════════════════════════════════════════════ */
 const KITS=[
- {n:'App Modernization',d:'Legacy onto a modern stack, without breaking what works.',
-  out:'A modernized application',shape:'Brownfield',ph:[2,3,4,5],
-  team:[['Solution Architect',1],['Tech Lead',1],['Forward Deployed Engineer',1],
-        ['Full-stack Engineers',2],['QA Engineer',1],['DevOps Engineer',.5],['AI SME',.25]],
-  ai:['AI Full-Stack Engineer','AI Tester','AI DevOps']},
- {n:'Product Build',d:'A new product from idea to first release.',
-  out:'A product in first release',shape:'Greenfield',ph:[0,1,2,3,4,5],
-  team:[['Solution Architect',1],['Tech Lead',1],['Forward Deployed Engineer',1],
-        ['Full-stack Engineers',3],['Product Designer',1],['QA Engineer',1],['DevOps Engineer',.5]],
-  ai:['AI Full-Stack Engineer','AI UX Designer','AI Tester']},
- {n:'AI-Driven Platform',d:'Platforms with AI features at their core.',
-  out:'An AI platform in production',shape:'Greenfield',ph:[1,2,3,4,5],
-  team:[['Solution Architect',1],['Tech Lead',1],['Forward Deployed Engineer',1],
-        ['AI Engineers',2],['Full-stack Engineer',1],['QA Engineer',1],['AI SME',.5]],
-  ai:['AI Full-Stack Engineer','AI Automation Engineer','AI Tester']},
- {n:'QE &amp; Automation',d:'Test strategy, automation suites and quality gates.',
-  out:'A suite that proves the build',shape:'Brownfield',ph:[4,5],
-  team:[['Tech Lead',1],['QA Lead',1],['Automation Engineers',2],['DevOps Engineer',.5],['AI SME',.25]],
-  ai:['AI Tester','AI Automation Engineer']},
- {n:'Firmware &amp; Device',d:'Device firmware testing and validation.',
-  out:'Validated device firmware',shape:'Brownfield',ph:[3,4],
-  team:[['Solution Architect',1],['Firmware Lead',1],['Firmware Engineers',2],
-        ['QA Engineer',1],['AI SME',.25]],
-  ai:['AI Tester','AI Automation Engineer']},
- {n:'Telemetry &amp; Data',d:'Pipelines, events and analytics at volume.',
-  out:'A pipeline you can trust',shape:'Brownfield',ph:[2,3,4,6],
-  team:[['Solution Architect',1],['Data Lead',1],['Data Engineers',2],
-        ['DevOps Engineer',1],['AI SME',.25]],
-  ai:['AI Developer','AI DevOps','AI Tester']},
- {n:'UX Discovery',d:'Research, flows and screens before any code is written.',
-  out:'A validated design system',shape:'Greenfield',ph:[0,1,2],
-  team:[['UX Lead',1],['Product Designers',2],['Researcher',1],['Tech Lead',.5]],
-  ai:['AI UX Designer','AI Graphic Designer']},
- {n:'Sustenance &amp; Support',d:'Keep live systems healthy, patched and improving.',
-  out:'A system that stays healthy',shape:'Brownfield',ph:[5,6],
-  team:[['Tech Lead',1],['Support Engineers',2],['QA Engineer',1],
-        ['DevOps Engineer',1],['AI SME',.25]],
-  ai:['AI Developer','AI DevOps','AI Tester']},
- {n:'Cloud &amp; DevOps',d:'Cloud foundations, CI/CD and operations.',
-  out:'A platform ready to ship on',shape:'Brownfield',ph:[2,3,5,6],
-  team:[['Solution Architect',1],['Platform Lead',1],['DevOps Engineers',2],
-        ['SRE',1],['AI SME',.25]],
-  ai:['AI DevOps','AI Automation Engineer']},
- {n:'Discovery Sprint',d:'A short sprint that turns an open question into a plan.',
-  out:'A plan you can fund',shape:'Either',ph:[0,1],
-  team:[['Solution Architect',1],['Forward Deployed Engineer',1],['Business Analyst',1],['AI SME',.5]],
-  ai:['AI Developer','AI UX Designer']}
-];
-const PHASES=[
- ['Discovery','Understand the ground before committing.',['Context packs','Spike plans','Option papers']],
- ['Requirements','Turn intent into something buildable.',['Requirement review','Story writing','Acceptance criteria']],
- ['Design','Decide the shape, and record why.',['Impact analysis','Architecture decision records','Interface contracts']],
- ['Build','Write it, review it, prove it.',['Code changes','Secure-code review','Unit coverage']],
- ['Test','Catch it while it is still cheap.',['Test plans','Automated suites','Defect triage']],
- ['Release','Ship without holding your breath.',['Release readiness','Pull requests','Rollback plans']],
- ['Operate','Keep it healthy after the applause.',['Runbooks','Incident triage','Patch cadence']]
-];
+ {n:'Application Modernization',cat:'Build & modernize',
+  short:'Modernize legacy applications into scalable, maintainable platforms.',
+  out:'Agreed application components modernized, tested and transitioned to the target architecture.',
+  dels:['Application and technical-debt assessment','Target architecture and modernization roadmap','Modernized application modules and APIs','Database migration scripts and plans','Automated regression and integration tests'],
+  pairs:[
+  ['Modernization','Modernization Architect','AI Application Assessment Agent'],
+  ['Backend','Backend Engineer','AI Backend Refactoring Agent'],
+  ['Frontend','Frontend Engineer','AI Frontend Modernization Agent'],
+  ['Database','Database Engineer','AI Data Migration Agent'],
+  ['QA','QA Engineer','AI Regression Testing Agent'],
+  ['DevOps','DevOps Engineer','AI Migration & Deployment Agent']]},
+ {n:'Digital Product Build',cat:'Build & modernize',
+  short:'Design, build and launch a production-ready digital product.',
+  out:'A tested, deployable product or agreed product increment accepted against defined requirements.',
+  dels:['Approved product backlog and acceptance criteria','Solution architecture, API contracts and data design','Working web or mobile application','Backend services, APIs and integrations','Automated unit, integration and regression tests'],
+  pairs:[
+  ['Product','Product Manager / Business Analyst','AI Product Analyst'],
+  ['Architecture','Solution Architect','AI Architect Agent'],
+  ['Full-stack','Full-stack Engineer','AI Full-stack Engineer'],
+  ['QA','QA Engineer','AI Quality Engineer'],
+  ['DevOps','DevOps Engineer','AI DevOps Engineer']]},
+ {n:'AI-Driven Platform Development',cat:'AI & data',
+  short:'Build enterprise AI applications, copilots and agentic workflows.',
+  out:'A production-ready AI application or workflow that meets agreed business, quality, safety and operational thresholds.',
+  dels:['AI use-case and solution architecture','LLM / model and tool integrations','Working assistant, RAG solution or agent workflow','Knowledge ingestion and retrieval pipelines','Evaluation datasets and quality report'],
+  pairs:[
+  ['Product','AI Product Manager / BA','AI Use Case Analyst'],
+  ['Architecture','AI Solution Architect','AI Agent Architect'],
+  ['ML','AI / ML Engineer','AI Agent Development Agent'],
+  ['Data / RAG','Data / RAG Engineer','AI Knowledge Engineering Agent'],
+  ['Integration','Backend / Integration Engineer','AI Integration Agent'],
+  ['Evaluation','AI Evaluation Engineer','AI Evaluation Agent']]},
+ {n:'QE & Automation',cat:'Quality & devices',
+  short:'Increase test coverage and release confidence with AI-assisted quality engineering.',
+  out:'A reusable quality engineering capability integrated into the delivery lifecycle.',
+  dels:['QA strategy and automation roadmap','Test architecture and automation framework','UI, API and mobile test suites as scoped','Performance test scripts and reports','CI/CD quality gates'],
+  pairs:[
+  ['QA strategy','QA Architect','AI Test Strategy Agent'],
+  ['Automation','QA Automation Engineer','AI Test Automation Agent'],
+  ['Functional QA','Functional QA Engineer','AI Functional Testing Agent'],
+  ['Performance','Performance Engineer','AI Performance Testing Agent'],
+  ['Security','Security Test Engineer','AI Security Testing Agent']]},
+ {n:'Firmware & Device Validation',cat:'Quality & devices',
+  short:'Develop, integrate and validate firmware and connected devices.',
+  out:'Firmware and device capabilities validated against agreed functional, compatibility and reliability requirements.',
+  dels:['Firmware design and implementation','Embedded software components','Protocol integration and test evidence','Automated firmware regression suite','Device interoperability and compatibility reports'],
+  pairs:[
+  ['Embedded','Embedded / Firmware Architect','AI Embedded Architecture Agent'],
+  ['Firmware','Firmware Engineer','AI Firmware Development Agent'],
+  ['Protocol','Protocol Engineer','AI Protocol Analysis Agent'],
+  ['Validation','Device Validation Engineer','AI Device Validation Agent'],
+  ['Automation','Test Automation Engineer','AI Device Automation Agent']]},
+ {n:'Telemetry & Data at Scale',cat:'AI & data',
+  short:'Build reliable data pipelines, streaming telemetry and analytics platforms.',
+  out:'A reliable data platform meeting agreed throughput, freshness, quality and availability targets.',
+  dels:['Data platform and pipeline architecture','Batch and streaming ingestion pipelines','Kafka / MQTT integration where needed','Data lake, warehouse or lakehouse components','Transformation and data quality rules'],
+  pairs:[
+  ['Data architecture','Data Architect','AI Data Architecture Agent'],
+  ['Data','Data Engineer','AI Data Engineering Agent'],
+  ['Streaming','Streaming Engineer','AI Streaming Agent'],
+  ['Data quality','Data Quality Engineer','AI Data Quality Agent'],
+  ['Analytics','Analytics Engineer','AI Analytics Agent'],
+  ['DataOps','DataOps Engineer','AI DataOps Agent']]},
+ {n:'UX Discovery & Design',cat:'Build & modernize',
+  short:'Translate user needs into intuitive, accessible digital experiences.',
+  out:'A validated user experience with approved designs and implementation-ready specifications.',
+  dels:['User research and insight report','Personas and customer journey maps','Information architecture and wireframes','High-fidelity interface designs','Clickable prototype'],
+  pairs:[
+  ['Research','UX Researcher','AI UX Research Agent'],
+  ['Design','Product / UI Designer','AI UI Design Agent'],
+  ['Content','UX Writer','AI UX Content Agent'],
+  ['Prototyping','Frontend Prototyping Engineer','AI Prototype Builder']]},
+ {n:'Sustenance & Support',cat:'Cloud & operate',
+  short:'Maintain, support and continuously improve business-critical software.',
+  out:'A continuously maintained product operating within agreed service levels and improvement priorities.',
+  dels:['Application health and monitoring dashboards','Incident triage and resolution records','Root cause analysis reports','Bug fixes and maintenance releases','Performance and database optimization'],
+  pairs:[
+  ['Service','Service Owner / Technical Lead','AI Service Operations Agent'],
+  ['Support','L2 / L3 Support Engineer','AI Incident Triage Agent'],
+  ['Engineering','Software Engineer','AI Code Remediation Agent'],
+  ['QA','QA Engineer','AI Regression Testing Agent'],
+  ['SRE','SRE / Release Engineer','AI Release & Observability Agent']]},
+ {n:'Cloud & DevOps Enablement',cat:'Cloud & operate',
+  short:'Automate cloud infrastructure, engineering platforms and software delivery.',
+  out:'A secure, repeatable cloud and delivery platform with measurable operational improvements.',
+  dels:['Cloud architecture and migration roadmap','Infrastructure as Code modules','CI/CD and GitOps workflows','Kubernetes and container configurations','Environment provisioning automation'],
+  pairs:[
+  ['Cloud','Cloud Architect','AI Cloud Architecture Agent'],
+  ['Platform','Platform Engineer','AI Platform Engineering Agent'],
+  ['DevOps','DevOps Engineer','AI DevOps Agent'],
+  ['SRE','SRE Engineer','AI Observability Agent'],
+  ['Security','Cloud Security / FinOps Engineer','AI Cloud Optimization Agent']]},
+ {n:'Discovery Sprint',cat:'Build & modernize',
+  short:'Turn an idea or challenge into a validated, execution-ready blueprint.',
+  out:'An approved solution blueprint, prioritized backlog and clear next-step POD configuration.',
+  dels:['Business problem and outcome statement','Functional and non-functional requirements','Prioritized backlog and acceptance criteria','Solution architecture and technology options','User journeys or prototype concepts'],
+  pairs:[
+  ['Product','Product Manager / Business Analyst','AI Product Analyst'],
+  ['Architecture','Solution Architect','AI Solution Architect'],
+  ['Research','UX Researcher / Designer','AI UX Research Agent'],
+  ['Delivery','Delivery Lead','AI Estimation & Planning Agent']]}];
+
 const CASES=[
- {kit:'01 · App Modernization',name:'TruSales',t:'A CRM built from scratch, agent-first',
+ {kit:'02 · Digital Product Build',name:'TruSales',t:'A CRM built from scratch, agent-first',
   p:'A licensed CRM and its enrichment stack, replaced with an in-house platform in a single quarter.',
   n:[['17 wks','start to platform'],['5,239','tests passing'],['~160K','lines of code']]},
- {kit:'01 · App Modernization',name:'TruIAM',t:'Three identity services rebuilt, nothing downstream changed',
+ {kit:'01 · Application Modernization',name:'TruIAM',t:'Three identity services rebuilt, nothing downstream changed',
   p:'Every endpoint kept its exact request and response, so the front end needed no work at all.',
   n:[['0','production incidents'],['99','endpoints checked'],['9.5 hrs','to stand up the method']]},
  {kit:'10 · Discovery Sprint',name:'Background verification',t:'Measuring whether AI was actually helping',
   p:'AI was already in daily use across regulated markets, with no evidence either way. We found the evidence.',
   n:[['222','defects traced'],['26','agents proven'],['6.5–22x','modelled return']]}];
-const ROLES=['Development','QA','DevOps','Security','UX','Architecture','Delivery management',
-  'Mobile','Data','Platform','Firmware','Support'];
+/* the disciplines the catalogue actually staffs, paired seat for paired seat */
+const ROLES=['Architecture','Product','Full-stack','Backend','Frontend','Database','QA',
+  'Test automation','Performance','Security','DevOps','Platform','Cloud','SRE','Data',
+  'Streaming','Analytics','ML','Firmware','Protocol','Device validation','UX research',
+  'Design','Support'];
 const DOMAINS=['Enterprise networking','Telecom','Embedded','IoT','Digital','Identity','Fintech',
   'Media','Any new domain'];
-const TICKER=['10 POD kits','200+ reviewed skills','Every SDLC phase','Greenfield and brownfield',
-  'Humans approve every real change','AI never merges','Forward deployed engineers',
-  'Buy an outcome'];
+const TICKER=['10 POD kits','1 specialist + 1 AI agent','Every SDLC phase',
+  'Greenfield and brownfield','Humans approve every real change','AI never merges',
+  'Human accountability for outcomes','Buy an outcome'];
 
 /* ═══════════════════════════════════════════════════════════
    A SHORT CURTAIN — brand, counter, lift.  Keeps the entry
@@ -1621,46 +1670,41 @@ function ART(i){
 }
 
 function POD(i){
-  /* the pod that delivered it — sits in the white space above the numbers */
-  const A='#344da1', INK='rgba(9,9,11,.78)', L='rgba(9,9,11,.10)', G='url(#cg'+i+')';
+  /* the pod that delivered it — one specialist + one AI agent per seat,
+     taken from the catalogue kit each case was bought as */
+  const A='#344da1', INK='rgba(9,9,11,.78)', L='rgba(9,9,11,.12)';
   const F='font-family="Helvetica,Arial"';
-  /* every seat named — a count told you nothing about what the AI did */
-  const SPEC=[
-    ['Front end','Back end','QA','AI full-stack','AI QA'],
-    ['Identity','Platform','QA','AI back end','AI DevOps'],
-    ['Review','QA','AI test design','AI analysis','AI DevOps']
-  ][i];
+  const pairs = KITS[[1,0,9][i]].pairs;
+  const n=pairs.length, step=520/n;
 
-  const seat=(x,cy,kind)=>{
-    if(kind==='ai'){ const C='rgba(9,9,11,.62)';
-      return `<circle cx="${x}" cy="${cy}" r="20" fill="#fff"
-          stroke="${L}" stroke-width="1.5"/>
-        <g transform="translate(${x} ${cy+4.1})" fill="none" stroke="${C}" stroke-width="1.6"
-           stroke-linecap="round">
-          <path d="M0 -8 V-11.4"/>
-          <circle cx="0" cy="-12.6" r="1.8" fill="${C}" stroke="none"/>
-          <rect x="-8.4" y="-8" width="16.8" height="14.2" rx="4.4"/>
-          <circle cx="-3.4" cy="-1" r="1.75" fill="${C}" stroke="none"/>
-          <circle cx="3.4" cy="-1" r="1.75" fill="${C}" stroke="none"/>
-          <path d="M-11.4 -1.8 H-8.4 M8.4 -1.8 H11.4"/>
-        </g>`; }
-    return `<circle cx="${x}" cy="${cy}" r="20" fill="#fff" stroke="${L}" stroke-width="1.5"/>
-      <g transform="translate(${x} ${cy})" fill="${INK}">
-        <circle cx="0" cy="-5.2" r="4.6"/>
-        <path d="M-8.4 8.6c0-4.9 3.7-8.2 8.4-8.2s8.4 3.3 8.4 8.2z"/></g>`;
-  };
-
-  const n=SPEC.length, step=520/n;
   let s=`<text x="4" y="12" ${F} font-size="11" font-weight="bold" letter-spacing="2"
       fill="${A}">THE POD</text>
     <rect x="0" y="26" width="520" height="118" rx="22" fill="#fff"
       stroke="rgba(52,77,161,.3)" stroke-width="1.5"/>`;
-  SPEC.forEach((k,j)=>{
-    const x=step*(j+.5), ai=k.startsWith('AI ');
-    s+=seat(x,72,ai?'ai':k);
-    s+=`<text x="${x}" y="116" ${F} font-size="11.5" text-anchor="middle"
-        fill="rgba(9,9,11,.5)">${k}</text>`;
+
+  pairs.forEach((pr,j)=>{
+    const cx=step*(j+.5), hx=cx-13, ax=cx+16, cy=72;
+    s+=`<path d="M${hx+14} ${cy} H${ax-9}" stroke="${L}" stroke-width="1"/>
+      <circle cx="${hx}" cy="${cy}" r="14" fill="#fff" stroke="${L}" stroke-width="1.5"/>
+      <g transform="translate(${hx} ${cy})" fill="${INK}">
+        <circle cx="0" cy="-3.6" r="3.2"/>
+        <path d="M-5.9 6c0-3.4 2.6-5.7 5.9-5.7s5.9 2.3 5.9 5.7z"/></g>
+      <circle cx="${ax}" cy="${cy}" r="11" fill="#fff"
+        stroke="rgba(9,9,11,.18)" stroke-width="1.2"/>
+      <g transform="translate(${ax} ${cy+2.3}) scale(.55)" fill="none"
+         stroke="rgba(9,9,11,.6)" stroke-width="2.6" stroke-linecap="round">
+        <path d="M0 -8.4 V-11.6"/>
+        <circle cx="0" cy="-13" r="1.9" fill="rgba(9,9,11,.6)" stroke="none"/>
+        <rect x="-8.6" y="-8.4" width="17.2" height="14.4" rx="4.4"/>
+        <circle cx="-3.4" cy="-1.4" r="1.9" fill="rgba(9,9,11,.6)" stroke="none"/>
+        <circle cx="3.4" cy="-1.4" r="1.9" fill="rgba(9,9,11,.6)" stroke="none"/>
+        <path d="M-11.4 -2.2 H-8.6 M8.6 -2.2 H11.4"/>
+      </g>
+      <text x="${cx}" y="${cy+36}" ${F} font-size="10.5" text-anchor="middle"
+        fill="rgba(9,9,11,.5)">${pr[0]}</text>`;
   });
+  s+=`<text x="260" y="131" ${F} font-size="10" text-anchor="middle"
+      fill="rgba(9,9,11,.38)">each seat = 1 specialist + 1 AI agent</text>`;
   return s;
 }
 
@@ -1670,10 +1714,10 @@ function POD(i){
 const Cfg = (function(){
   const hubN=$('#vHubN');
   const gLines=$('#vLines'), gPulse=$('#vPulse'), gNodes=$('#vNodes'),
-        tip=$('#vizTip'), vizBox=$('#viz');
+        gLab=$('#vLabels'), vizBox=$('#viz');
   if(!gNodes) return { render(){} };
   const NS='http://www.w3.org/2000/svg';
-  const CX=220, CY=196, R_T=152, R_A=92, MAXT=9, MAXA=4;
+  const CX=300, CY=205, R_T=108, R_A=172, MAXT=6, MAXA=6;
   const fmt=n=>Number.isInteger(n)?String(n):String(+n.toFixed(2));
   let nodes=[], dirty=false, pulses=[];
 
@@ -1686,11 +1730,29 @@ const Cfg = (function(){
     const g=document.createElementNS(NS,'g'); g.setAttribute('class','vnode');
     const hit=document.createElementNS(NS,'circle');
     hit.setAttribute('r','22'); hit.setAttribute('fill','transparent');
-    const dot=document.createElementNS(NS,'circle');
-    dot.setAttribute('r', kind==='ai'?'5.5':'8');
-    dot.setAttribute('fill', kind==='ai'?'#3ddc97':'rgba(255,255,255,.92)');
+    let dot;
+    if(kind==='ai'){
+      /* the same bot head used elsewhere, scaled into the node */
+      dot=document.createElementNS(NS,'g');
+      dot.setAttribute('transform','translate(0 2.9) scale(.68)');
+      dot.setAttribute('fill','none');
+      dot.setAttribute('stroke','#3ddc97');
+      dot.setAttribute('stroke-width','2.4');
+      dot.setAttribute('stroke-linecap','round');
+      dot.innerHTML='<path d="M0 -8.4 V-11.6"/>'+
+        '<circle cx="0" cy="-13" r="1.9" fill="#3ddc97" stroke="none"/>'+
+        '<rect x="-8.6" y="-8.4" width="17.2" height="14.4" rx="4.4"/>'+
+        '<circle cx="-3.4" cy="-1.4" r="1.9" fill="#3ddc97" stroke="none"/>'+
+        '<circle cx="3.4" cy="-1.4" r="1.9" fill="#3ddc97" stroke="none"/>'+
+        '<path d="M-11.4 -2.2 H-8.6 M8.6 -2.2 H11.4"/>';
+    } else {
+      dot=document.createElementNS(NS,'g');
+      dot.setAttribute('fill','rgba(255,255,255,.92)');
+      dot.innerHTML='<circle cx="0" cy="-4.4" r="3.9"/>'+
+        '<path d="M-7.1 7.3c0-4.2 3.2-7 7.1-7s7.1 2.8 7.1 7z"/>';
+    }
     const ring=document.createElementNS(NS,'circle');
-    ring.setAttribute('r', kind==='ai'?'11':'15');
+    ring.setAttribute('r','15');
     ring.setAttribute('fill','none');
     ring.setAttribute('stroke', kind==='ai'?'rgba(61,220,151,.38)':'rgba(255,255,255,.22)');
     ring.setAttribute('stroke-width','1');
@@ -1699,24 +1761,10 @@ const Cfg = (function(){
     txt.setAttribute('text-anchor','middle');
     g.append(ring,dot,hit,txt); gNodes.appendChild(g);
     return {kind,g,line,dot,ring,txt,x:CX,y:CY,o:0,s:0,
-            tx:CX,ty:CY,to:0,ts:0,name:'',val:0};
+            tx:CX,ty:CY,to:0,ts:0,ox:CX,oy:CY,name:''};
   }
   for(let i=0;i<MAXT;i++) nodes.push(mk('team'));
   for(let i=0;i<MAXA;i++) nodes.push(mk('ai'));
-
-  nodes.forEach(n=>{
-    n.g.addEventListener('pointerenter',()=>{
-      if(n.to<.1||!tip) return;
-      tip.textContent = n.kind==='ai' ? n.name : n.name+' · '+fmt(n.val)+' FTE';
-      tip.style.left=(n.x/440*100)+'%'; tip.style.top=(n.y/400*100)+'%';
-      tip.classList.add('on');
-      n.ring.setAttribute('stroke', n.kind==='ai'?'rgba(61,220,151,.9)':'rgba(255,255,255,.75)');
-    });
-    n.g.addEventListener('pointerleave',()=>{
-      tip && tip.classList.remove('on');
-      n.ring.setAttribute('stroke', n.kind==='ai'?'rgba(61,220,151,.38)':'rgba(255,255,255,.22)');
-    });
-  });
 
   let spin=0, running=false, inView=true;
   /* one node, written out at its current position */
@@ -1724,7 +1772,7 @@ const Cfg = (function(){
     n.g.setAttribute('transform','translate('+n.x.toFixed(1)+' '+n.y.toFixed(1)+') scale('+n.s.toFixed(3)+')');
     n.g.setAttribute('opacity',n.o.toFixed(3));
     n.g.style.pointerEvents = n.o>.5 ? 'auto':'none';
-    n.line.setAttribute('x1',CX); n.line.setAttribute('y1',CY);
+    n.line.setAttribute('x1',n.ox.toFixed(1)); n.line.setAttribute('y1',n.oy.toFixed(1));
     n.line.setAttribute('x2',n.x.toFixed(1)); n.line.setAttribute('y2',n.y.toFixed(1));
     n.line.setAttribute('opacity',(n.o*.9).toFixed(3));
   }
@@ -1780,48 +1828,49 @@ const Cfg = (function(){
             .replace(/AI Full-Stack Eng/,'AI Full-Stack');
   }
   /* the diagram shows one representative pod and stays put — it used to be
-     redrawn by whatever kit the chooser was hovering, three sections away */
-  const TYPICAL={
-    team:[['Solution Architect',1],['Forward Deployed Engineer',1],
-          ['QA Engineer',1],['DevOps Engineer',1]],
-    ai:['AI Full-Stack Engineer','AI UX Designer']};
+     redrawn by whatever kit the chooser was hovering, three sections away.
+     Each spoke carries one augmented seat: the specialist and the AI agent
+     side by side, same size, with both names written out — no hover needed. */
   function render(src){
     const k = typeof src==='number' ? KITS[src] : src;
-    const total=k.team.reduce((a,b)=>a+b[1],0);
-    if(hubN) hubN.textContent = k===TYPICAL ? '' : fmt(total)+' FTE';
-    const T=k.team.length, A=k.ai.length;
+    const P=k.pairs, N=P.length;
+    if(hubN) hubN.textContent='';
+    gLab.innerHTML='';
     nodes.forEach((n,idx)=>{
-      if(idx<MAXT){
-        if(idx<T){
-          const a=-Math.PI/2+(idx/T)*Math.PI*2, wide=1+Math.abs(Math.cos(a))*0.14;
-          n.tx=CX+Math.cos(a)*R_T*wide; n.ty=CY+Math.sin(a)*R_T*0.86;
-          n.to=1; n.ts=1; n.name=k.team[idx][0]; n.val=k.team[idx][1];
-          n.txt.textContent=short(k.team[idx][0]);
-          n.txt.setAttribute('y', Math.sin(a)<-0.25 ? -22 : 30);
-          const fde=/Forward Deployed/.test(k.team[idx][0]);
-          n.dot.setAttribute('fill', fde?'#5e78d8':'rgba(255,255,255,.92)');
-          n.dot.setAttribute('r', fde?'9.5':'8');
-          n.ring.setAttribute('stroke', fde?'rgba(94,120,216,.6)':'rgba(255,255,255,.22)');
-        } else { n.to=0; n.ts=.3; n.tx=CX; n.ty=CY; }
+      const human = idx<MAXT, j = human?idx:idx-MAXT;
+      if(j>=N){ n.to=0; n.ts=.3; n.tx=CX; n.ty=CY; n.ox=CX; n.oy=CY; return; }
+      const a=-Math.PI/2+(j/N)*Math.PI*2, c=Math.cos(a), sn=Math.sin(a);
+      /* the specialist sits on the inner ring, their agent directly outside —
+         so every spoke reads hub -> person -> bot, the same way round */
+      const R = human?R_T:R_A;
+      n.tx=CX+c*R; n.ty=CY+sn*R*0.86;
+      n.ox = human ? CX : CX+c*R_T;
+      n.oy = human ? CY : CY+sn*R_T*0.86;
+      n.to=1; n.ts=1;
+      n.name = human ? P[j][1] : P[j][2];
+      if(human){
+        /* the specialist's role sits with the specialist, not out by the bot */
+        n.txt.textContent=P[j][0];
+        n.txt.setAttribute('x',0);
+        n.txt.setAttribute('y', sn<0 ? 27 : -21);
       } else {
-        const j=idx-MAXT;
-        if(j<A){
-          /* drop each AI seat into the middle of a gap between two team
-             spokes — on 7 roles they used to land 2.8° off one and the
-             connector line ran straight through the node */
-          const gap=Math.round(j*T/A);
-          const a=-Math.PI/2+((gap+0.5)/T)*Math.PI*2;
-          n.tx=CX+Math.cos(a)*R_A; n.ty=CY+Math.sin(a)*R_A*0.82;
-          n.to=1; n.ts=1; n.name=k.ai[j];
-          n.txt.textContent=short(k.ai[j]);
-          n.txt.setAttribute('y', Math.sin(a)<0 ? -16 : 24);
-        } else { n.to=0; n.ts=.3; n.tx=CX; n.ty=CY; }
+        /* one label for the pair.  Writing both names out repeated the same
+           word twice ("DevOps Engineer / AI DevOps Engineer") — the two icons
+           already say which is which, and the panel lists the full names. */
+        const lx=CX+c*(R_A+30), ly=CY+sn*(R_A+30)*0.86;
+        const t=document.createElementNS(NS,'text');
+        t.setAttribute('class','vlbl');
+        t.setAttribute('text-anchor', c>.3?'start':c<-.3?'end':'middle');
+        t.setAttribute('x',lx.toFixed(1));
+        t.setAttribute('y',(ly + (sn<-0.3?-6: sn>0.3?14:4)).toFixed(1));
+        t.setAttribute('class','vlbl ai');
+        t.textContent='AI '+P[j][0];
+        gLab.appendChild(t);
       }
     });
-    buildPulses(k);
     settle();
   }
-  render(TYPICAL);
+  render(KITS[1]);          /* Digital Product Build — five paired seats */
   return { render };
 })();
 
@@ -1837,36 +1886,41 @@ const SAYS=[
  'The hardware is ready. Proving the firmware is not.',
  'The data is in there somewhere, but nobody trusts the numbers.',
  'Everyone wants something different, and nothing has been designed yet.',
- 'The system is live and slowly rotting, and nobody really owns it.',
+ 'The system is live, and keeping it that way falls to whoever is free.',
  'Every release is a manual, nervous event that needs the same three people.',
  'We do not know enough yet to put a number on the real thing.'
 ];
 
 (function(){
-  const list=$('#chList'), q=$('#chQ'), out=$('#chOut'), team=$('#chTeam'),
-        ph=$('#chPh'), go=$('#chGo'), box=$('.chooser'), custom=$('#chCustom');
+  const list=$('#chList'), q=$('#chQ'), out=$('#chOut'), seats=$('#chSeats'),
+        dels=$('#chDels'), go=$('#chGo'), box=$('.chooser'), custom=$('#chCustom');
   if(!list||!q) return;
   const fmt=n=>Number.isInteger(n)?String(n):String(+n.toFixed(2));
   let cur=-1;
 
+  const esc=t=>String(t).replace(/&/g,'&amp;').replace(/</g,'&lt;');
+  /* one row per augmented seat: the specialist, and the AI agent beside them */
+  /* every AI name ends in "Agent" — the column heading already says so */
+  const ai=n=>n.replace(/\s+Agent$/,'');
+  function seatRows(k){
+    return '<div class="seat seat--h"><span>Specialist</span><i>AI agent</i></div>'+
+      k.pairs.map(pr=>'<div class="seat"><span>'+esc(pr[1])+'</span>'+
+        '<i>'+esc(ai(pr[2]))+'</i></div>').join('');
+  }
+  function delList(k){ return k.dels.slice(0,3).map(d=>'<li>'+esc(d)+'</li>').join(''); }
+
   KITS.forEach((k,i)=>{
-    const total=k.team.reduce((a,b)=>a+b[1],0);
-    const first=PHASES[k.ph[0]][0], last=PHASES[k.ph[k.ph.length-1]][0];
     const item=el('div','ch__item');
     const b=el('button','ch__o'); b.type='button'; b.dataset.i=i;
     b.setAttribute('role','option');
     b.setAttribute('aria-selected', i===0?'true':'false');
-    b.innerHTML='<b>'+SAYS[i]+'</b><em>'+fmt(total)+' FTE</em>';
+    b.innerHTML='<b>'+SAYS[i]+'</b><em>'+k.pairs.length+' pairs</em>';
     /* the same facts, inline — this is what shows when the layout stacks */
     const d=el('div','ch__d');
     d.innerHTML=
-      '<dl class="ch__dl">'+
-        '<div><dt>You get</dt><dd>'+k.out+'</dd></div>'+
-        '<div><dt>The pod</dt><dd>'+k.team.length+' human seats · '+k.ai.length+
-          ' AI employees · <strong>'+fmt(total)+' FTE</strong></dd></div>'+
-        '<div><dt>It covers</dt><dd>'+first+' through to '+last+'</dd></div>'+
-        '<div><dt>Approval</dt><dd>A person signs off every real change</dd></div>'+
-      '</dl>'+
+      '<p class="ch__out">'+esc(k.out)+'</p>'+
+      '<div class="ch__seats">'+seatRows(k)+'</div>'+
+      '<div class="ch__dels"><h4>You receive</h4><ul>'+delList(k)+'</ul></div>'+
       '<button class="ch__dgo" type="button" data-go="'+i+'">Start with this pod'+
         '<svg viewBox="0 0 12 12" fill="none" width="11" height="11" aria-hidden="true">'+
         '<path d="M2 6h8M6.5 2.5 10 6l-3.5 3.5" stroke="currentColor" stroke-width="1.8" '+
@@ -1879,15 +1933,12 @@ const SAYS=[
     if(i===cur) return;
     cur=i;
     const k=KITS[i];
-    const total=k.team.reduce((a,b)=>a+b[1],0);
-    const first=PHASES[k.ph[0]][0], last=PHASES[k.ph[k.ph.length-1]][0];
     box.classList.add('swap');
     setTimeout(()=>{
       q.textContent=SAYS[i];
       out.textContent=k.out;
-      team.innerHTML=k.team.length+' human seats · '+k.ai.length+
-        ' AI employees · <strong style="font-weight:600">'+fmt(total)+' FTE</strong>';
-      ph.textContent=first+' through to '+last;
+      seats.innerHTML=seatRows(k);
+      dels.innerHTML=delList(k);
       box.classList.remove('swap');
     },190);
     $$('.ch__o',list).forEach((b,n)=>{
@@ -1931,7 +1982,7 @@ const SAYS=[
 
 /* ═══════════════════════════════════════════════════════════
    THE SHIFT — six people you coordinate into an outcome, or one
-   pod of people and AI employees that delivers it.
+   pod of people and AI agents that delivers it.
    ═══════════════════════════════════════════════════════════ */
 (function(){
   const NS='http://www.w3.org/2000/svg';
@@ -1942,16 +1993,18 @@ const SAYS=[
     for(const k in a) n.setAttribute(k,a[k]); return n;};
 
   /* ── glyphs ── */
-  function person(x,y,cls){
-    const g=mk('g',{transform:`translate(${x} ${y})`,class:'sw__ic'+(cls||'')});
+  function person(x,y,cls,sc){
+    const k=sc||1;
+    const g=mk('g',{transform:`translate(${x} ${y}) scale(${k})`,class:'sw__ic'+(cls||'')});
     g.appendChild(mk('circle',{cx:0,cy:-6,r:4.6}));
     g.appendChild(mk('path',{d:'M-8.4 8.6c0-4.9 3.7-8.2 8.4-8.2s8.4 3.3 8.4 8.2z'}));
     return g;
   }
-  function agent(x,y){
+  function agent(x,y,sc){
     /* a bot head — reads as "AI" without needing the letters */
-    const C='#3ddc97';
-    const g=mk('g',{transform:`translate(${x} ${y+4.2})`,class:'sw__ic sw__ic--ai'});
+    const C='#3ddc97', k=sc||1;
+    const g=mk('g',{transform:`translate(${x} ${y+4.2*k}) scale(${k})`,
+      class:'sw__ic sw__ic--ai'});
     g.appendChild(mk('path',{d:'M0 -8.4 V-11.6',stroke:C,'stroke-width':1.5,'stroke-linecap':'round'}));
     g.appendChild(mk('circle',{cx:0,cy:-12.8,r:1.7,fill:C}));
     g.appendChild(mk('rect',{x:-8.6,y:-8.4,width:17.2,height:14.4,rx:4.4,
@@ -1974,22 +2027,29 @@ const SAYS=[
     gLn.appendChild(person(x,LY));
   });
 
-  /* ── right: the pod — three people, two AI employees ── */
+  /* ── right: the pod — three people, two AI agents ── */
   /* the same roster the pod diagram shows, so the two agree */
-  const SEATS=[['Architecture',0],['AI full-stack',1],['FDE',2],
-               ['AI UX design',1],['QA Eng',0],['DevOps Eng',0]];
-  const RY=207, STEP=480/SEATS.length;
-  const FILL={0:'none',1:'rgba(61,220,151,.16)',2:'rgba(94,120,216,.2)'};
-  const STROKE={0:'rgba(255,255,255,.22)',1:'rgba(61,220,151,.75)',2:'rgba(94,120,216,.85)'};
-  SEATS.forEach(([name,kind],i)=>{
-    const x=20+STEP*(i+0.5);
-    gRn.appendChild(mk('circle',{cx:x,cy:RY,r:19,
-      fill:FILL[kind], stroke:STROKE[kind],'stroke-width':1.2}));
-    gRn.appendChild(kind===1 ? agent(x,RY) : person(x,RY));
-    const t=mk('text',{x,y:RY+40,'text-anchor':'middle',
-      class:'sw__nl'+(kind===1?' sw__nl--ai':kind===2?' sw__nl--fde':'')});
-    t.textContent=name;
+  /* the same pod the diagram above shows: one specialist + one AI agent
+     per seat, paired, both names written out.  The FDE is not a paired
+     seat, so it is not in here. */
+  const SEATS=KITS[1].pairs;
+  const RY=200, STEP=480/SEATS.length, R=14;
+  SEATS.forEach((pr,i)=>{
+    const cx=20+STEP*(i+0.5), hx=cx-17, ax=cx+17;
+    gRn.appendChild(mk('path',{d:`M${hx+R+2} ${RY} H${ax-R-2}`,
+      stroke:'rgba(255,255,255,.3)','stroke-width':1}));
+    gRn.appendChild(mk('circle',{cx:hx,cy:RY,r:R,fill:'none',
+      stroke:'rgba(255,255,255,.26)','stroke-width':1.2}));
+    gRn.appendChild(person(hx,RY,null,0.78));
+    gRn.appendChild(mk('circle',{cx:ax,cy:RY,r:R,fill:'rgba(61,220,151,.14)',
+      stroke:'rgba(61,220,151,.75)','stroke-width':1.2}));
+    gRn.appendChild(agent(ax,RY,0.72));
+    const t=mk('text',{x:cx,y:RY+32,'text-anchor':'middle',class:'sw__nl'});
+    t.textContent=pr[0];
     gRn.appendChild(t);
+    const t2=mk('text',{x:cx,y:RY+45,'text-anchor':'middle',class:'sw__nl sw__nl--ai'});
+    t2.textContent='AI '+pr[0];
+    gRn.appendChild(t2);
   });
 
   /* ── pulses ── */
