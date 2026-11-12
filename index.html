@@ -63,7 +63,7 @@ main>section{min-height:100vh;display:flex;flex-direction:column;justify-content
 main>section>.wrap{width:100%}
 main>section.talk{min-height:auto;display:block}
 /* the chooser carries the most rows of anything on the page */
-main>section#configure{padding-block:clamp(40px,4vw,64px)}
+main>section#configure{padding-block:clamp(32px,3.2vw,52px)}
 /* two rows of tags do not need a whole screen of their own */
 main>section#reach{min-height:auto;padding-block:clamp(56px,6.5vw,96px)}
 @media(max-width:860px){main>section{min-height:auto}html{scroll-snap-type:none}}
@@ -520,18 +520,23 @@ body.on-light .burger i{background:var(--ink)}
   border-radius:var(--r);padding:clamp(20px,2.1vw,30px);color:#fff;overflow:hidden;
   background:linear-gradient(152deg,#1b1a3a 0%,#241c3c 42%,#2b1c33 100%);
   box-shadow:inset 0 0 0 1px rgba(255,255,255,.08)}
-.ch__q{font-size:clamp(1.15rem,1.9vw,1.65rem);font-weight:400;letter-spacing:-.035em;
-  line-height:1.24;min-height:2.6em;
+.ch__kicker{margin:0;font-size:9.5px;letter-spacing:.2em;text-transform:uppercase;
+  font-weight:700;background:var(--grad-d);-webkit-background-clip:text;
+  background-clip:text;color:transparent;transition:opacity .3s var(--e)}
+.ch__q{margin:6px 0 0;font-size:clamp(1.2rem,1.8vw,1.6rem);font-weight:400;
+  letter-spacing:-.038em;line-height:1.16;color:#fff;
   transition:opacity .3s var(--e),transform .36s var(--e)}
-.ch__q::before{content:"“"}
-.ch__q::after{content:"”"}
-.chooser.swap .ch__q{opacity:0;transform:translateY(8px)}
-.ch__out{margin:clamp(12px,1.5vw,18px) 0 0;font-size:13.5px;line-height:1.4;
+.ch__short{margin:7px 0 0;font-size:13px;line-height:1.4;color:rgba(255,255,255,.6);
+  transition:opacity .3s var(--e)}
+.chooser.swap .ch__q,.chooser.swap .ch__kicker,.chooser.swap .ch__short{opacity:0}
+.chooser.swap .ch__q{transform:translateY(8px)}
+.ch__out{margin:clamp(14px,1.8vw,22px) 0 0;padding-top:clamp(12px,1.5vw,18px);
+  border-top:1px solid var(--wline);font-size:13.5px;line-height:1.4;
   color:rgba(255,255,255,.62);transition:opacity .3s var(--e)}
 /* one row per augmented seat — the specialist, and the AI agent beside them */
 .ch__seats{margin-top:clamp(14px,1.8vw,22px);transition:opacity .3s var(--e)}
 .seat{display:grid;grid-template-columns:minmax(0,1fr) 14px minmax(0,1fr);
-  align-items:center;gap:0 10px;padding:9px 0;border-top:1px solid var(--wline)}
+  align-items:center;gap:0 10px;padding:7px 0;border-top:1px solid var(--wline)}
 .seat span{font-size:13px;color:#fff;letter-spacing:-.012em}
 .seat i{font-style:normal;font-size:13px;letter-spacing:-.012em;color:#7fe3b4}
 .seat::before{content:"+";grid-column:2;grid-row:1;justify-self:center;
@@ -554,17 +559,29 @@ body.on-light .burger i{background:var(--ink)}
 .ch__cta{margin-top:auto;align-self:flex-start}
 
 /* right: the ten sentences */
-.ch__list{display:grid;gap:4px}
+.ch__list{display:grid;gap:3px;grid-auto-rows:1fr;align-content:stretch}
 .ch__o{position:relative;overflow:hidden;display:grid;
   grid-template-columns:minmax(0,1fr) auto;gap:14px;align-items:center;
   width:100%;text-align:left;border:0;cursor:pointer;border-radius:var(--r-s);
-  padding:clamp(10px,1vw,13px) clamp(13px,1.3vw,17px);
+  padding:clamp(8px,.85vw,11px) clamp(12px,1.2vw,16px);
   background:rgba(9,9,11,.035);color:var(--ink);
   transition:background .3s var(--e),color .3s var(--e),transform .4s var(--spring)}
 .ch__o:hover{background:rgba(9,9,11,.075);transform:translateX(3px)}
 .ch__o[aria-selected="true"]{background:linear-gradient(120deg,#1b1a3a,#2b1c33);color:#fff}
-.ch__o b{font-size:clamp(12.5px,1vw,14px);font-weight:500;letter-spacing:-.022em;
-  line-height:1.28}
+/* one compact row per kit, so all ten and the custom card fit a screen */
+.ch__o{grid-template-columns:22px minmax(0,1fr) auto;gap:0 12px;align-items:baseline}
+.ch__o u{text-decoration:none;font-size:10px;letter-spacing:.06em;font-weight:700;
+  font-variant-numeric:tabular-nums;color:var(--faint)}
+.ch__o b{min-width:0;font-size:clamp(13px,1.05vw,14.5px);font-weight:500;
+  letter-spacing:-.025em;line-height:1.25}
+.ch__o s{display:none}
+.ch__o em{justify-self:end}
+.ch__o[aria-selected="true"] u{color:rgba(255,255,255,.5)}
+@media(min-width:1180px){
+  .ch__o{grid-template-columns:22px minmax(0,1fr) auto auto;gap:0 14px}
+  .ch__o s{display:block;text-decoration:none;font-size:11px;color:var(--faint);
+    white-space:nowrap}
+}
 .ch__o em{font-style:normal;font-size:11px;font-weight:600;white-space:nowrap;
   font-variant-numeric:tabular-nums;color:var(--mute);transition:color .3s var(--e)}
 .ch__o[aria-selected="true"] em{color:var(--accent-2)}
@@ -597,14 +614,12 @@ body.on-light .burger i{background:var(--ink)}
    real call to action, so it is built to outweigh the ten tiles above it. */
 @keyframes kcSlot{0%,100%{box-shadow:0 0 0 0 rgba(255,255,255,.42)}
   60%{box-shadow:0 0 0 10px rgba(255,255,255,0)}}
-.ch__note{margin:clamp(14px,1.8vw,22px) 0 0;font-size:12.5px;color:var(--mute);
-  max-width:62ch}
 .kc__or{display:flex;align-items:center;gap:16px;margin-top:clamp(14px,1.8vw,24px);
   font-size:10px;letter-spacing:.24em;text-transform:uppercase;color:var(--mute)}
 .kc__or i{flex:1;height:1px;background:var(--line)}
 .kcustom{position:relative;overflow:hidden;width:100%;margin-top:clamp(12px,1.6vw,20px);
   display:grid;grid-template-columns:auto minmax(0,1fr) auto;align-items:center;
-  gap:clamp(20px,2.6vw,40px);padding:clamp(22px,2.6vw,34px) clamp(22px,2.8vw,40px);
+  gap:clamp(18px,2.2vw,34px);padding:clamp(16px,1.8vw,24px) clamp(18px,2.2vw,32px);
   border:0;border-radius:var(--r);cursor:pointer;text-align:left;color:#fff;
   background:#050507;
   box-shadow:0 0 0 7px rgba(9,9,11,.045), 0 40px 90px -44px rgba(0,0,0,1);
@@ -645,7 +660,7 @@ body.on-light .burger i{background:var(--ink)}
 .kcustom .kc__k{align-self:start;justify-self:start;
   font-size:10.5px;letter-spacing:.22em;text-transform:uppercase;font-weight:700;
   white-space:nowrap;color:#fff}
-.kcustom .kc__t{font-size:clamp(1.2rem,2.1vw,1.85rem);font-weight:400;
+.kcustom .kc__t{font-size:clamp(1.05rem,1.6vw,1.4rem);font-weight:400;
   letter-spacing:-.04em;line-height:1.12;color:rgba(255,255,255,.6)}
 .kcustom .kc__t b{font-weight:400;color:#fff}
 .kcustom .kc__s{font-size:clamp(.82rem,1vw,.95rem);color:rgba(255,255,255,.45)}
@@ -703,6 +718,75 @@ body.on-light .burger i{background:var(--ink)}
   font-size:clamp(1.45rem,2.5vw,2.2rem);
   background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent}
 .case__n div span{display:block;margin-top:8px;font-size:11px;color:var(--faint)}
+
+/* ═══════════════════════════════════════════════════════════
+   WHO OWNS WHAT — a split board with the approval gate on the seam
+   ═══════════════════════════════════════════════════════════ */
+@keyframes owSpark{0%{transform:translateY(-6%);opacity:0}
+  12%{opacity:1}88%{opacity:1}100%{transform:translateY(106%);opacity:0}}
+.ow{margin-top:clamp(16px,2.2vw,30px)}
+
+.ow__board{position:relative;margin-top:clamp(16px,2vw,26px);
+  display:grid;grid-template-columns:1fr 128px 1fr;align-items:stretch;
+  border-radius:var(--r);overflow:hidden;
+  background:
+    linear-gradient(90deg,rgba(255,255,255,.05),transparent 46%),
+    linear-gradient(270deg,rgba(61,220,151,.09),transparent 46%),
+    rgba(255,255,255,.02);
+  box-shadow:inset 0 0 0 1px var(--wline)}
+.ow__col{padding:clamp(20px,2.4vw,34px);display:flex;flex-direction:column;min-width:0}
+.ow__col--a{text-align:right;align-items:flex-end}
+.ow__k{font-size:9.5px;letter-spacing:.2em;text-transform:uppercase;font-weight:700;
+  color:rgba(255,255,255,.45)}
+.ow__k--a{color:#6fe7b4}
+.ow__role{margin-top:clamp(12px,1.5vw,18px);font-size:clamp(1.05rem,1.6vw,1.45rem);
+  font-weight:400;letter-spacing:-.03em;color:#fff}
+.ow__role--a{color:#9ff0c9}
+.ow__line{margin:9px 0 0;font-size:13.5px;line-height:1.46;color:rgba(255,255,255,.6);
+  max-width:38ch}
+.ow__verbs{list-style:none;margin:auto 0 0;padding:clamp(16px,2vw,26px) 0 0;
+  display:flex;flex-wrap:wrap;gap:6px}
+.ow__col--a .ow__verbs{justify-content:flex-end}
+.ow__verbs li{padding:5px 11px;border-radius:999px;font-size:11px;letter-spacing:.02em;
+  color:rgba(255,255,255,.6);box-shadow:inset 0 0 0 1px var(--wline)}
+.ow__verbs--a li{color:rgba(159,240,201,.9);box-shadow:inset 0 0 0 1px rgba(61,220,151,.26)}
+
+/* the seam: where the draft stops and a person takes over */
+.ow__seam{position:relative}
+.ow__seam::before{content:"";position:absolute;left:50%;top:0;bottom:0;width:1px;
+  transform:translateX(-.5px);
+  background:linear-gradient(180deg,transparent,rgba(255,255,255,.22) 18%,
+    rgba(255,255,255,.22) 82%,transparent)}
+.ow__spark{position:absolute;left:50%;top:0;width:3px;height:22%;
+  transform:translateX(-1.5px);border-radius:2px;
+  background:linear-gradient(180deg,transparent,#3ddc97,transparent);
+  animation:owSpark 3.8s linear infinite}
+.ow__gate{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);
+  display:inline-flex;align-items:center;gap:6px;white-space:nowrap;
+  padding:7px 13px;border-radius:999px;background:#0d0e14;color:rgba(255,255,255,.7);
+  font-size:9.5px;letter-spacing:.14em;text-transform:uppercase;font-weight:700;
+  box-shadow:inset 0 0 0 1px rgba(255,255,255,.2),0 0 26px -8px rgba(61,220,151,.6)}
+.ow__every{margin:clamp(16px,2vw,24px) 0 0;text-align:center;font-size:11px;
+  letter-spacing:.16em;text-transform:uppercase;font-weight:700;color:rgba(255,255,255,.4)}
+.ow__chips{margin-top:clamp(10px,1.2vw,16px);display:flex;flex-wrap:wrap;gap:5px;
+  justify-content:center;
+  -webkit-mask-image:linear-gradient(180deg,#000 55%,transparent);
+          mask-image:linear-gradient(180deg,#000 55%,transparent)}
+.ow__chip{padding:4px 11px;border-radius:999px;font-size:11px;letter-spacing:.01em;
+  color:rgba(255,255,255,.45);box-shadow:inset 0 0 0 1px var(--wline)}
+.ow__foot{margin:clamp(14px,1.8vw,22px) 0 0;text-align:center;font-size:12.5px;
+  color:rgba(255,255,255,.5)}
+.ow__foot b{font-weight:600;color:rgba(255,255,255,.8)}
+@media(max-width:860px){
+  .ow__board{grid-template-columns:1fr;row-gap:0}
+  .ow__col--a{text-align:left;align-items:flex-start}
+  .ow__col--a .ow__verbs{justify-content:flex-start}
+  .ow__seam{height:54px}
+  .ow__seam::before{left:0;right:0;top:50%;bottom:auto;width:auto;height:1px;
+    transform:none;background:linear-gradient(90deg,transparent,rgba(255,255,255,.22) 18%,
+      rgba(255,255,255,.22) 82%,transparent)}
+  .ow__spark{display:none}
+}
 
 /* ═══════════════════════════════════════════════════════════
    17 · REACH
@@ -838,7 +922,7 @@ body.on-light .burger i{background:var(--ink)}
     <div class="navl" id="navl">
       <span class="pip" id="pip" aria-hidden="true"></span>
       <a href="#pod">The pod</a><a href="#shift">The shift</a>
-      <a href="#configure">Start here</a><a href="#work">Work</a>
+      <a href="#configure">Start here</a><a href="#owns">Who owns what</a><a href="#work">Work</a>
     </div>
     <a class="btn nav__cta" href="#talk" data-mag>
       <span class="btn__t"><s>Get in touch</s><s aria-hidden="true">Get in touch</s></span>
@@ -847,8 +931,10 @@ body.on-light .burger i{background:var(--ink)}
   </div>
 </nav>
 <div class="sheet" id="sheet" aria-hidden="true">
-  <a href="#pod"><span>The pod</span></a><a href="#shift"><span>The shift</span></a>
+  <a href="#pod"><span>The pod</span></a><a href="#owns"><span>Who owns what</span></a>
+  <a href="#shift"><span>The shift</span></a>
   <a href="#configure"><span>Start here</span></a>
+  <a href="#owns"><span>Who owns what</span></a>
   <a href="#work"><span>Work</span></a>
   <a href="#talk"><span>Get in touch</span></a>
 </div>
@@ -1040,7 +1126,9 @@ body.on-light .burger i{background:var(--ink)}
     <div class="chooser r">
       <!-- the answer, written out -->
       <div class="ch__panel">
-        <p class="ch__q" id="chQ"></p>
+        <p class="ch__kicker" id="chKick"></p>
+        <h3 class="ch__q" id="chQ"></h3>
+        <p class="ch__short" id="chShort"></p>
         <p class="ch__out" id="chOut"></p>
         <div class="ch__seats" id="chSeats"></div>
         <div class="ch__dels"><h4>You receive</h4><ul id="chDels"></ul></div>
@@ -1054,9 +1142,6 @@ body.on-light .burger i{background:var(--ink)}
       <div class="ch__list" id="chList" role="listbox"
            aria-label="Choose the outcome closest to yours"></div>
     </div>
-
-    <p class="ch__note r r2">Each kit is a starting configuration. Scope, seat mix,
-      timeline and commercials are confirmed after discovery.</p>
 
     <div class="kc__or" aria-hidden="true"><i></i><span>or</span><i></i></div>
 
@@ -1077,6 +1162,58 @@ body.on-light .burger i{background:var(--ink)}
       </span>
       <span class="kc__go"><span>Tell us the outcome</span><svg viewBox="0 0 12 12" fill="none" width="11" height="11" aria-hidden="true"><path d="M2 6h8M6.5 2.5 10 6l-3.5 3.5" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
     </button>
+  </div>
+</section>
+
+
+<!-- ───────── 04 WHO OWNS WHAT ───────── -->
+<section class="zone-d" id="owns">
+  <div class="wrap">
+    <div class="shead">
+      <div><h2 class="d2" data-split>Who owns what</h2>
+      </div>
+      <p class="lede r r2">AI increases capacity. People own the outcome. Pick a seat and see
+        exactly where the line falls.</p>
+    </div>
+
+    <div class="ow r r2">
+      <div class="ow__board">
+        <div class="ow__col ow__col--h">
+          <span class="ow__k">The specialist</span>
+          <b class="ow__role">Owns the outcome</b>
+          <p class="ow__line">Sets the direction, makes the technical decisions, approves the
+            work, and answers for quality, security and what happens after release.</p>
+          <ul class="ow__verbs">
+            <li>Directs</li><li>Decides</li><li>Approves</li><li>Is accountable</li>
+          </ul>
+        </div>
+
+        <div class="ow__seam" aria-hidden="true">
+          <i class="ow__spark"></i>
+          <span class="ow__gate"><svg viewBox="0 0 14 14" width="11" height="11" fill="none"
+            stroke="currentColor" stroke-width="1.6" stroke-linecap="round">
+            <rect x="2.6" y="6.2" width="8.8" height="6.2" rx="1.6"/>
+            <path d="M4.6 6.2V4.4a2.4 2.4 0 0 1 4.8 0v1.8"/></svg>approval gate</span>
+        </div>
+
+        <div class="ow__col ow__col--a">
+          <span class="ow__k ow__k--a">The AI agent</span>
+          <b class="ow__role ow__role--a">Adds the capacity</b>
+          <p class="ow__line">Reads the code, the brief and the data; drafts code, tests,
+            scripts and documents; runs the checks and produces the evidence — bounded work,
+            inside approved access.</p>
+          <ul class="ow__verbs ow__verbs--a">
+            <li>Analyses</li><li>Drafts</li><li>Executes</li><li>Validates</li>
+          </ul>
+        </div>
+      </div>
+
+      <p class="ow__every">The same split holds in every seat, in every pod</p>
+      <div class="ow__chips" id="ownChips" aria-hidden="true"></div>
+
+      <p class="ow__foot"><b>AI never merges.</b> Everything above the gate is a draft until
+        a person signs it off.</p>
+    </div>
   </div>
 </section>
 
@@ -1244,107 +1381,107 @@ function splitWords(node){
    DATA
    ═══════════════════════════════════════════════════════════ */
 const KITS=[
- {n:'Application Modernization',cat:'Build & modernize',
+ {no:'01',n:'Application Modernization',cat:'Build & modernize',
   short:'Modernize legacy applications into scalable, maintainable platforms.',
   out:'Agreed application components modernized, tested and transitioned to the target architecture.',
   dels:['Application and technical-debt assessment','Target architecture and modernization roadmap','Modernized application modules and APIs','Database migration scripts and plans','Automated regression and integration tests'],
   pairs:[
-  ['Modernization','Modernization Architect','AI Application Assessment Agent'],
-  ['Backend','Backend Engineer','AI Backend Refactoring Agent'],
-  ['Frontend','Frontend Engineer','AI Frontend Modernization Agent'],
-  ['Database','Database Engineer','AI Data Migration Agent'],
-  ['QA','QA Engineer','AI Regression Testing Agent'],
-  ['DevOps','DevOps Engineer','AI Migration & Deployment Agent']]},
- {n:'Digital Product Build',cat:'Build & modernize',
+  ['Modernization','Modernization Architect','Owns modernization direction, target architecture, migration strategy and trade-offs.','AI Application Assessment Agent','Scans repositories and dependencies, maps components, identifies obsolete patterns and drafts modernization options.'],
+  ['Backend','Backend Engineer','Owns service boundaries, business logic correctness, API design and code approval.','AI Backend Refactoring Agent','Proposes refactoring, generates bounded service changes, API migrations and unit tests.'],
+  ['Frontend','Frontend Engineer','Owns frontend architecture, user experience continuity and implementation standards.','AI Frontend Modernization Agent','Identifies legacy UI patterns, drafts component migrations and generates updated frontend code.'],
+  ['Database','Database Engineer','Owns data architecture, migration integrity, consistency and rollback decisions.','AI Data Migration Agent','Analyses schemas, drafts migration scripts and prepares data comparison checks.'],
+  ['QA','QA Engineer','Owns regression strategy, risk coverage, functional acceptance and release recommendation.','AI Regression Testing Agent','Generates regression scenarios, executes approved suites and compares expected behaviour.'],
+  ['DevOps','DevOps Engineer','Owns target infrastructure, deployment safety, observability and production readiness.','AI Migration & Deployment Agent','Drafts infrastructure code, migration automation, pipeline changes and deployment checklists.']]},
+ {no:'02',n:'Digital Product Build',cat:'Build & modernize',
   short:'Design, build and launch a production-ready digital product.',
   out:'A tested, deployable product or agreed product increment accepted against defined requirements.',
   dels:['Approved product backlog and acceptance criteria','Solution architecture, API contracts and data design','Working web or mobile application','Backend services, APIs and integrations','Automated unit, integration and regression tests'],
   pairs:[
-  ['Product','Product Manager / Business Analyst','AI Product Analyst'],
-  ['Architecture','Solution Architect','AI Architect Agent'],
-  ['Full-stack','Full-stack Engineer','AI Full-stack Engineer'],
-  ['QA','QA Engineer','AI Quality Engineer'],
-  ['DevOps','DevOps Engineer','AI DevOps Engineer']]},
- {n:'AI-Driven Platform Development',cat:'AI & data',
+  ['Product','Product Manager / Business Analyst','Sets product direction, understands customer value, prioritizes the backlog and approves requirements.','AI Product Analyst','Analyses briefs, drafts user stories and acceptance criteria, identifies gaps and prepares backlog options.'],
+  ['Architecture','Solution Architect','Owns architecture, technology choices, integration boundaries and technical trade-offs.','AI Architect Agent','Researches patterns, drafts architecture options, API contracts, data models and technical documentation.'],
+  ['Full-stack','Full-stack Engineer','Owns implementation approach, code quality, engineering standards and merge decisions.','AI Full-stack Engineer','Generates frontend and backend code, API implementations, unit tests and pull-request drafts.'],
+  ['QA','QA Engineer','Owns test strategy, risk assessment, defect acceptance and release quality recommendation.','AI Quality Engineer','Creates test scenarios, automation scripts, test data and regression analysis.'],
+  ['DevOps','DevOps Engineer','Owns infrastructure, deployment strategy, security configuration and production readiness.','AI DevOps Engineer','Drafts CI/CD configurations, deployment scripts, infrastructure definitions and monitoring setup.']]},
+ {no:'03',n:'AI-Driven Platform Development',cat:'AI & data',
   short:'Build enterprise AI applications, copilots and agentic workflows.',
   out:'A production-ready AI application or workflow that meets agreed business, quality, safety and operational thresholds.',
   dels:['AI use-case and solution architecture','LLM / model and tool integrations','Working assistant, RAG solution or agent workflow','Knowledge ingestion and retrieval pipelines','Evaluation datasets and quality report'],
   pairs:[
-  ['Product','AI Product Manager / BA','AI Use Case Analyst'],
-  ['Architecture','AI Solution Architect','AI Agent Architect'],
-  ['ML','AI / ML Engineer','AI Agent Development Agent'],
-  ['Data / RAG','Data / RAG Engineer','AI Knowledge Engineering Agent'],
-  ['Integration','Backend / Integration Engineer','AI Integration Agent'],
-  ['Evaluation','AI Evaluation Engineer','AI Evaluation Agent']]},
- {n:'QE & Automation',cat:'Quality & devices',
+  ['Product','AI Product Manager / BA','Defines the business use case, process boundaries, value hypothesis and acceptance criteria.','AI Use Case Analyst','Maps workflows, identifies automation candidates and drafts AI requirements and scenarios.'],
+  ['Architecture','AI Solution Architect','Owns agent topology, model selection, security boundaries and system design decisions.','AI Agent Architect','Drafts orchestration patterns, tool boundaries, architecture diagrams and design alternatives.'],
+  ['ML','AI / ML Engineer','Owns model integration, prompt strategy, agent behaviour and implementation quality.','AI Agent Development Agent','Generates prompts, structured outputs, agent workflows, tool integrations and test scaffolding.'],
+  ['Data / RAG','Data / RAG Engineer','Owns knowledge architecture, access control, retrieval quality and data freshness.','AI Knowledge Engineering Agent','Builds ingestion, chunking, indexing, retrieval and synchronization workflows.'],
+  ['Integration','Backend / Integration Engineer','Owns enterprise API integration, transaction safety and authorization.','AI Integration Agent','Drafts API connectors, tool interfaces, schemas and integration code.'],
+  ['Evaluation','AI Evaluation Engineer','Owns evaluation methodology, risk thresholds, safety validation and release recommendation.','AI Evaluation Agent','Creates datasets, runs evaluations, scores outputs and surfaces failure patterns.']]},
+ {no:'04',n:'QE & Automation',cat:'Quality & devices',
   short:'Increase test coverage and release confidence with AI-assisted quality engineering.',
   out:'A reusable quality engineering capability integrated into the delivery lifecycle.',
   dels:['QA strategy and automation roadmap','Test architecture and automation framework','UI, API and mobile test suites as scoped','Performance test scripts and reports','CI/CD quality gates'],
   pairs:[
-  ['QA strategy','QA Architect','AI Test Strategy Agent'],
-  ['Automation','QA Automation Engineer','AI Test Automation Agent'],
-  ['Functional QA','Functional QA Engineer','AI Functional Testing Agent'],
-  ['Performance','Performance Engineer','AI Performance Testing Agent'],
-  ['Security','Security Test Engineer','AI Security Testing Agent']]},
- {n:'Firmware & Device Validation',cat:'Quality & devices',
+  ['QA strategy','QA Architect','Sets quality strategy, risk model, test levels and coverage priorities.','AI Test Strategy Agent','Analyses requirements, drafts test strategies, coverage maps and scenarios.'],
+  ['Automation','QA Automation Engineer','Owns automation architecture, framework choices, maintainability and code review.','AI Test Automation Agent','Generates UI, API and mobile automation scripts and maintenance suggestions.'],
+  ['Functional QA','Functional QA Engineer','Owns business validation, exploratory testing and defect acceptance.','AI Functional Testing Agent','Drafts test cases, prepares test data and executes repeatable checks.'],
+  ['Performance','Performance Engineer','Owns workload models, performance targets and bottleneck decisions.','AI Performance Testing Agent','Creates load scenarios, processes test results and identifies anomalies.'],
+  ['Security','Security Test Engineer','Owns security testing scope, vulnerability assessment and remediation validation.','AI Security Testing Agent','Assists with security test cases, scan interpretation and verification evidence.']]},
+ {no:'05',n:'Firmware & Device Validation',cat:'Quality & devices',
   short:'Develop, integrate and validate firmware and connected devices.',
   out:'Firmware and device capabilities validated against agreed functional, compatibility and reliability requirements.',
   dels:['Firmware design and implementation','Embedded software components','Protocol integration and test evidence','Automated firmware regression suite','Device interoperability and compatibility reports'],
   pairs:[
-  ['Embedded','Embedded / Firmware Architect','AI Embedded Architecture Agent'],
-  ['Firmware','Firmware Engineer','AI Firmware Development Agent'],
-  ['Protocol','Protocol Engineer','AI Protocol Analysis Agent'],
-  ['Validation','Device Validation Engineer','AI Device Validation Agent'],
-  ['Automation','Test Automation Engineer','AI Device Automation Agent']]},
- {n:'Telemetry & Data at Scale',cat:'AI & data',
+  ['Embedded','Embedded / Firmware Architect','Owns embedded architecture, hardware constraints, interfaces and design trade-offs.','AI Embedded Architecture Agent','Analyses firmware structure, hardware interfaces, dependencies and architecture options.'],
+  ['Firmware','Firmware Engineer','Owns firmware implementation, debugging decisions and code quality.','AI Firmware Development Agent','Drafts C/C++ changes, unit tests, debugging hypotheses and code documentation.'],
+  ['Protocol','Protocol Engineer','Owns protocol interpretation, interoperability decisions and implementation correctness.','AI Protocol Analysis Agent','Analyses specifications, drafts message flows and creates protocol test scenarios.'],
+  ['Validation','Device Validation Engineer','Owns device test strategy, lab setup, acceptance criteria and release recommendation.','AI Device Validation Agent','Generates device test cases, procedures and validation summaries.'],
+  ['Automation','Test Automation Engineer','Owns hardware test framework, lab automation reliability and execution standards.','AI Device Automation Agent','Drafts automation scripts, parses device logs and summarizes test failures.']]},
+ {no:'06',n:'Telemetry & Data at Scale',cat:'AI & data',
   short:'Build reliable data pipelines, streaming telemetry and analytics platforms.',
   out:'A reliable data platform meeting agreed throughput, freshness, quality and availability targets.',
   dels:['Data platform and pipeline architecture','Batch and streaming ingestion pipelines','Kafka / MQTT integration where needed','Data lake, warehouse or lakehouse components','Transformation and data quality rules'],
   pairs:[
-  ['Data architecture','Data Architect','AI Data Architecture Agent'],
-  ['Data','Data Engineer','AI Data Engineering Agent'],
-  ['Streaming','Streaming Engineer','AI Streaming Agent'],
-  ['Data quality','Data Quality Engineer','AI Data Quality Agent'],
-  ['Analytics','Analytics Engineer','AI Analytics Agent'],
-  ['DataOps','DataOps Engineer','AI DataOps Agent']]},
- {n:'UX Discovery & Design',cat:'Build & modernize',
+  ['Data architecture','Data Architect','Owns data strategy, platform architecture, models and technology decisions.','AI Data Architecture Agent','Drafts architecture options, data models, storage and pipeline designs.'],
+  ['Data','Data Engineer','Owns ingestion, transformation logic, integrity and maintainability.','AI Data Engineering Agent','Generates ETL/ELT code, SQL transformations and data processing logic.'],
+  ['Streaming','Streaming Engineer','Owns event architecture, ordering, throughput and delivery semantics.','AI Streaming Agent','Drafts Kafka/MQTT consumers, event transformations and streaming workflows.'],
+  ['Data quality','Data Quality Engineer','Owns quality standards, validation rules and data acceptance.','AI Data Quality Agent','Generates validation rules, detects anomalies and identifies inconsistent records.'],
+  ['Analytics','Analytics Engineer','Owns business definitions, analytical models and dashboard correctness.','AI Analytics Agent','Drafts SQL models, queries, dashboard layouts and analytical summaries.'],
+  ['DataOps','DataOps Engineer','Owns pipeline observability, recovery strategy and production operations.','AI DataOps Agent','Monitors pipeline signals, summarizes failures and proposes optimization options.']]},
+ {no:'07',n:'UX Discovery & Design',cat:'Build & modernize',
   short:'Translate user needs into intuitive, accessible digital experiences.',
   out:'A validated user experience with approved designs and implementation-ready specifications.',
   dels:['User research and insight report','Personas and customer journey maps','Information architecture and wireframes','High-fidelity interface designs','Clickable prototype'],
   pairs:[
-  ['Research','UX Researcher','AI UX Research Agent'],
-  ['Design','Product / UI Designer','AI UI Design Agent'],
-  ['Content','UX Writer','AI UX Content Agent'],
-  ['Prototyping','Frontend Prototyping Engineer','AI Prototype Builder']]},
- {n:'Sustenance & Support',cat:'Cloud & operate',
+  ['Research','UX Researcher','Sets research objectives, validates insights and identifies real user needs.','AI UX Research Agent','Synthesizes interview notes, feedback and behavioural data into research themes.'],
+  ['Design','Product / UI Designer','Owns interaction patterns, visual decisions and design system approval.','AI UI Design Agent','Generates layout options, wireframes, screen concepts and visual alternatives.'],
+  ['Content','UX Writer','Owns language, tone, accessibility and content decisions.','AI UX Content Agent','Drafts microcopy, onboarding content, help text and validation messages.'],
+  ['Prototyping','Frontend Prototyping Engineer','Owns technical feasibility, component structure and prototype quality.','AI Prototype Builder','Converts approved designs into interactive prototypes and reusable component drafts.']]},
+ {no:'08',n:'Sustenance & Support',cat:'Cloud & operate',
   short:'Maintain, support and continuously improve business-critical software.',
   out:'A continuously maintained product operating within agreed service levels and improvement priorities.',
   dels:['Application health and monitoring dashboards','Incident triage and resolution records','Root cause analysis reports','Bug fixes and maintenance releases','Performance and database optimization'],
   pairs:[
-  ['Service','Service Owner / Technical Lead','AI Service Operations Agent'],
-  ['Support','L2 / L3 Support Engineer','AI Incident Triage Agent'],
-  ['Engineering','Software Engineer','AI Code Remediation Agent'],
-  ['QA','QA Engineer','AI Regression Testing Agent'],
-  ['SRE','SRE / Release Engineer','AI Release & Observability Agent']]},
- {n:'Cloud & DevOps Enablement',cat:'Cloud & operate',
+  ['Service','Service Owner / Technical Lead','Owns service priorities, commitments, escalations and customer accountability.','AI Service Operations Agent','Consolidates health signals, summarizes service trends and drafts prioritization reports.'],
+  ['Support','L2 / L3 Support Engineer','Owns investigation, troubleshooting decisions and resolution approval.','AI Incident Triage Agent','Classifies tickets, correlates logs and suggests probable causes and next checks.'],
+  ['Engineering','Software Engineer','Owns bug fixes, code changes, regression risk and merge approval.','AI Code Remediation Agent','Analyses defects, drafts fixes and generates unit tests.'],
+  ['QA','QA Engineer','Owns validation strategy, defect closure and release recommendation.','AI Regression Testing Agent','Generates regression checks and validates approved fixes.'],
+  ['SRE','SRE / Release Engineer','Owns reliability, deployment decisions, rollback approval and operations readiness.','AI Release & Observability Agent','Summarizes monitoring signals and drafts release plans and operational reports.']]},
+ {no:'09',n:'Cloud & DevOps Enablement',cat:'Cloud & operate',
   short:'Automate cloud infrastructure, engineering platforms and software delivery.',
   out:'A secure, repeatable cloud and delivery platform with measurable operational improvements.',
   dels:['Cloud architecture and migration roadmap','Infrastructure as Code modules','CI/CD and GitOps workflows','Kubernetes and container configurations','Environment provisioning automation'],
   pairs:[
-  ['Cloud','Cloud Architect','AI Cloud Architecture Agent'],
-  ['Platform','Platform Engineer','AI Platform Engineering Agent'],
-  ['DevOps','DevOps Engineer','AI DevOps Agent'],
-  ['SRE','SRE Engineer','AI Observability Agent'],
-  ['Security','Cloud Security / FinOps Engineer','AI Cloud Optimization Agent']]},
- {n:'Discovery Sprint',cat:'Build & modernize',
+  ['Cloud','Cloud Architect','Owns cloud strategy, architecture, security posture and platform trade-offs.','AI Cloud Architecture Agent','Drafts cloud patterns, migration plans and infrastructure recommendations.'],
+  ['Platform','Platform Engineer','Owns platform architecture, developer experience and infrastructure standards.','AI Platform Engineering Agent','Generates Terraform, Kubernetes and platform automation drafts.'],
+  ['DevOps','DevOps Engineer','Owns CI/CD design, deployment strategy and release safety.','AI DevOps Agent','Drafts build pipelines, deployment workflows and automation scripts.'],
+  ['SRE','SRE Engineer','Owns reliability engineering, SLOs and operational readiness.','AI Observability Agent','Analyses logs, metrics and traces and drafts alerts and incident summaries.'],
+  ['Security','Cloud Security / FinOps Engineer','Owns security controls, financial guardrails and cost decisions.','AI Cloud Optimization Agent','Surfaces misconfigurations, resource patterns and cost optimization options.']]},
+ {no:'10',n:'Discovery Sprint',cat:'Build & modernize',
   short:'Turn an idea or challenge into a validated, execution-ready blueprint.',
   out:'An approved solution blueprint, prioritized backlog and clear next-step POD configuration.',
   dels:['Business problem and outcome statement','Functional and non-functional requirements','Prioritized backlog and acceptance criteria','Solution architecture and technology options','User journeys or prototype concepts'],
   pairs:[
-  ['Product','Product Manager / Business Analyst','AI Product Analyst'],
-  ['Architecture','Solution Architect','AI Solution Architect'],
-  ['Research','UX Researcher / Designer','AI UX Research Agent'],
-  ['Delivery','Delivery Lead','AI Estimation & Planning Agent']]}];
+  ['Product','Product Manager / Business Analyst','Understands business objectives, prioritizes value and approves scope.','AI Product Analyst','Analyses documents, drafts user stories and acceptance criteria, and finds requirement gaps.'],
+  ['Architecture','Solution Architect','Sets technical direction, evaluates alternatives and approves architecture.','AI Solution Architect','Researches patterns, drafts diagrams and compares solution options.'],
+  ['Research','UX Researcher / Designer','Understands user needs and approves journey and experience decisions.','AI UX Research Agent','Synthesizes research, creates persona and journey drafts and wireframe concepts.'],
+  ['Delivery','Delivery Lead','Owns delivery feasibility, commitments, risks and planning decisions.','AI Estimation & Planning Agent','Generates WBS, identifies dependencies and prepares estimate and schedule drafts.']]}];
 
 const CASES=[
  {kit:'02 · Digital Product Build',name:'TruSales',t:'A CRM built from scratch, agent-first',
@@ -1847,7 +1984,7 @@ const Cfg = (function(){
       n.ox = human ? CX : CX+c*R_T;
       n.oy = human ? CY : CY+sn*R_T*0.86;
       n.to=1; n.ts=1;
-      n.name = human ? P[j][1] : P[j][2];
+      n.name = human ? P[j][1] : P[j][3];
       if(human){
         /* the specialist's role sits with the specialist, not out by the bot */
         n.txt.textContent=P[j][0];
@@ -1875,25 +2012,25 @@ const Cfg = (function(){
 })();
 
 /* ═══════════════════════════════════════════════════════════
-   THE CHOOSER — the ten written as the sentence a client would
-   actually say, with the pod that answers it spelled out.
+   WHO OWNS WHAT — the split is the same whatever the discipline
    ═══════════════════════════════════════════════════════════ */
-const SAYS=[
- 'Our main application is holding us back, and we cannot stop shipping while we fix it.',
- 'We have an idea and a deadline, and no team to build it.',
- 'We want AI inside the product itself, not bolted on afterwards.',
- 'We are nervous about releasing, because we cannot prove anything still works.',
- 'The hardware is ready. Proving the firmware is not.',
- 'The data is in there somewhere, but nobody trusts the numbers.',
- 'Everyone wants something different, and nothing has been designed yet.',
- 'The system is live, and keeping it that way falls to whoever is free.',
- 'Every release is a manual, nervous event that needs the same three people.',
- 'We do not know enough yet to put a number on the real thing.'
-];
+(function(){
+  const box=$('#ownChips'); if(!box) return;
+  /* every discipline the catalogue staffs, named once */
+  const seen=new Set();
+  KITS.forEach(k=>k.pairs.forEach(p=>seen.add(p[0])));
+  [...seen].forEach(n=>box.appendChild(el('span','ow__chip',n)));
+})();
+
+/* ═══════════════════════════════════════════════════════════
+   THE CHOOSER — the ten POD kits, each opened out into the
+   paired seats and the deliverables it comes with.
+   ═══════════════════════════════════════════════════════════ */
 
 (function(){
   const list=$('#chList'), q=$('#chQ'), out=$('#chOut'), seats=$('#chSeats'),
-        dels=$('#chDels'), go=$('#chGo'), box=$('.chooser'), custom=$('#chCustom');
+        dels=$('#chDels'), kick=$('#chKick'), shortp=$('#chShort'),
+        go=$('#chGo'), box=$('.chooser'), custom=$('#chCustom');
   if(!list||!q) return;
   const fmt=n=>Number.isInteger(n)?String(n):String(+n.toFixed(2));
   let cur=-1;
@@ -1905,19 +2042,21 @@ const SAYS=[
   function seatRows(k){
     return '<div class="seat seat--h"><span>Specialist</span><i>AI agent</i></div>'+
       k.pairs.map(pr=>'<div class="seat"><span>'+esc(pr[1])+'</span>'+
-        '<i>'+esc(ai(pr[2]))+'</i></div>').join('');
+        '<i>'+esc(ai(pr[3]))+'</i></div>').join('');
   }
-  function delList(k){ return k.dels.slice(0,3).map(d=>'<li>'+esc(d)+'</li>').join(''); }
+  function delList(k){ return k.dels.slice(0,2).map(d=>'<li>'+esc(d)+'</li>').join(''); }
 
   KITS.forEach((k,i)=>{
     const item=el('div','ch__item');
     const b=el('button','ch__o'); b.type='button'; b.dataset.i=i;
     b.setAttribute('role','option');
     b.setAttribute('aria-selected', i===0?'true':'false');
-    b.innerHTML='<b>'+SAYS[i]+'</b><em>'+k.pairs.length+' pairs</em>';
+    b.innerHTML='<u>'+k.no+'</u><b>'+esc(k.n)+'</b>'+
+      '<s>'+esc(k.cat)+'</s><em>'+k.pairs.length+' × 1+1</em>';
     /* the same facts, inline — this is what shows when the layout stacks */
     const d=el('div','ch__d');
     d.innerHTML=
+      '<p class="ch__short">'+esc(k.short)+'</p>'+
       '<p class="ch__out">'+esc(k.out)+'</p>'+
       '<div class="ch__seats">'+seatRows(k)+'</div>'+
       '<div class="ch__dels"><h4>You receive</h4><ul>'+delList(k)+'</ul></div>'+
@@ -1935,7 +2074,9 @@ const SAYS=[
     const k=KITS[i];
     box.classList.add('swap');
     setTimeout(()=>{
-      q.textContent=SAYS[i];
+      kick.textContent='POD '+k.no+' · '+k.cat;
+      q.textContent=k.n;
+      shortp.textContent=k.short;
       out.textContent=k.out;
       seats.innerHTML=seatRows(k);
       dels.innerHTML=delList(k);
@@ -2328,7 +2469,7 @@ void main(){
      ENTERING the band, so whatever was last seen stayed lit — including back
      at the hero, where nothing should be.  It also still listed sections that
      no longer exist and had never listed #pod. */
-  const SECT=['pod','shift','configure','work'];
+  const SECT=['pod','shift','configure','owns','work'];
   const nodes=SECT.map(id=>document.getElementById(id)).filter(Boolean);
   let curId=null;
   function spy(){
